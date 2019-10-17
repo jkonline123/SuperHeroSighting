@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Organizations</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        
+        
+        
+    </head>
+    <body>
+
+
+        <h1>Organizations</h1>
+
+
+
+
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Address</th>
+                    <th>Contact Info</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="o : ${organization}">
+                    <!--                    loops thru list -->
+                    <td th:text="${o.organizationID}">id</td>
+                    <td th:text="${o.name}">id</td>
+                    <td th:text="${o.description}">id</td>
+                    <td th:text="${o.address}">id</td>
+                     <td th:text="${o.contactInfo}">id</td>
+                    <td><a href="#"> Edit</a></t>
+                    <td><a href="#"> Delete</a></t>
+                </tr>
+
+
+
+            </tbody>
+
+        </table>
+
+    </body>
+</html>
