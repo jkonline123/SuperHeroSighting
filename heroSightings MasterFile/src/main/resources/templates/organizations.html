@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Organizations</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        
+        
+        
+    </head>
+    <body>
+
+
+        <h1>Organizations</h1>
+
+
+    
+        
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <a href="teachers" class="btn btn-outline-primary btn-lg">Characters</a>
+            </div>
+            <div class="col text-center m-3">
+                <a href="students" class="btn btn-outline-primary btn-lg">Sightings</a>
+            </div>
+            <div class="col text-center m-3">
+                <a href="courses" class="btn btn-outline-primary btn-lg">Organizations</a>
+            </div>
+        </div>
+      
+
+ <div class="row m-4 border border-dark">
+               <div class="col-3 text-center m-3">
+                   <span class="h3">Add Organization</span>
+               </div>
+               <div class="col-7 text-center m-3">
+                   <form action="addOrganization" method="POST">
+                       <div class="form-group row">
+                           <label for="name" class="col-3 col-form-label">Name</label>
+                           <div class="col-9">
+                               <input type="text" name="name" id="name" class="form-control"/>
+                           </div>
+                       </div>
+                       <div class="form-group row">
+                           <label for="description" class="col-3 col-form-label">Description</label>
+                           <div class="col-9">
+                               <input type="text" name="description" id="description" class="form-control"/>
+                           </div>
+                       </div>
+                       <div class="form-group row">
+                           <label for="address" class="col-3 col-form-label">Address</label>
+                           <div class="col-9">
+                               <input type="text" name="address" id="address" class="form-control"/>
+                           </div>
+                       </div>
+                       <div class="form-group row">
+                           <label for="contactInfo" class="col-3 col-form-label">contact Info</label>
+                           <div class="col-9">
+                               <input type="text" name="contactInfo" id="contactInfo" class="form-control"/>
+                           </div>
+                       </div>
+                       <button type="submit" class="btn btn-primary">Add Organization</button>
+                   </form>
+               </div>
+           </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Address</th>
+                    <th>Contact Info</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="o : ${organization}">
+                    <!--                    loops thru list -->
+                    <td th:text="${o.organizationID}">id</td>
+                    <td th:text="${o.name}">id</td>
+                    <td th:text="${o.description}">id</td>
+                    <td th:text="${o.address}">id</td>
+                     <td th:text="${o.contactInfo}">id</td>
+                    <td><a href="#"> Edit</a></t>
+                    <td><a href="#"> Delete</a></t>
+                </tr>
+
+
+
+            </tbody>
+
+        </table>
+
+    </body>
+</html>
