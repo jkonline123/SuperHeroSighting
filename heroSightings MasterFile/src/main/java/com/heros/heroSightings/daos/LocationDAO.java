@@ -6,6 +6,7 @@
 package com.heros.heroSightings.daos;
 
 import com.heros.heroSightings.dtos.Location;
+import java.util.List;
 
 /**
  *
@@ -13,6 +14,10 @@ import com.heros.heroSightings.dtos.Location;
  */
 public interface LocationDAO {
     
-    Location createLocation(Location L);
+   Location getLocationById(int id);
+   List<Location>getAllLocations();
+   Location addLocation(Location location);
+   void updateLocation(Location location);
+   void deleteLocationById(int id);
     
 }
