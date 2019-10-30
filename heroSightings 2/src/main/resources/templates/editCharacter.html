@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>edit Character</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="row m-4 border border-dark">
+            <div class="col-3 text-center m-3">
+                <span class="h3">Add Character</span>
+            </div>
+            <div class="col-7 text-center m-3">
+                <form action="editCharacter" method="POST">
+                    <div class="form-group row">
+                        <label for="name" class="col-3 col-form-label">Name</label>
+                        <div class="col-9">
+                            <input type="text" name="name" id="name" class="form-control" th:value="${character.name}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="description" class="col-3 col-form-label">Description</label>
+                        <div class="col-9">
+                            <input type="text" name="description" id="description" class="form-control"th:value="${character.description}"/>
+                        </div>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="isHero" id="isHero" value="true" th:checked="${character.isHero}">
+                            <label class="form-check-label" for="isHero">
+                                Hero
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="isHero" id="isHero" value="false" th:checked="${character.isHero}">
+                            <label class="form-check-label" for="isHero">
+                                Villain
+                            </label>
+                        </div>
+                    </div>
+
+                            <input type="text" name="id"  style="display:none;" class="form-control" th:value="${character.id}"/>
+
+                    <button type="submit" class="btn btn-primary">Add Character</button>
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>

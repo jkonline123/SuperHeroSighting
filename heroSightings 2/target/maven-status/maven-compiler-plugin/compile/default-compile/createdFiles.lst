@@ -1,0 +1,6 @@
+com/heros/heroSightings/HeroSightingsApplication.class
+com/heros/heroSightings/daos/LocationDAO.class
+com/heros/heroSightings/daos/LocationDaoDB$LocationMapper.class
+com/heros/heroSightings/Controllers/locationController.class
+com/heros/heroSightings/daos/LocationDaoDB.class
+com/heros/heroSightings/dtos/Location.class
