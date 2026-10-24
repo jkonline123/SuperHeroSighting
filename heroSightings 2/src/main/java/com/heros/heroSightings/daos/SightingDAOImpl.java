@@ -31,7 +31,7 @@ public class SightingDAOImpl implements SightingDAO {
     @Override
     public Sighting getSightingById(int id) {
   try {
-            final String SELECT_SIGHTING_BY_ID = "SELECT * FROM Sightings WHERE id = ?";
+            final String SELECT_SIGHTING_BY_ID = "SELECT * FROM Sightings WHERE SightingsID = ?";
             return jdbc.queryForObject(SELECT_SIGHTING_BY_ID, new SightingMapper(), id);
         } catch (DataAccessException ex) {
             return null;
