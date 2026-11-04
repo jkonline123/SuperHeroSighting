@@ -23,3 +23,6 @@ Thumbs.db
 *.sqlite
 *.sqlite3
 *.dump
+
+# Downloaded Maven wrapper launcher
+.mvn/wrapper/maven-wrapper.jar

@@ -115,7 +115,7 @@ For the original Spring context-load test, configure a working local MySQL datab
 bash ./mvnw test
 ```
 
-Automated checks are configured to run the isolated controller tests. **End-to-end behavior and the full database-backed suite still need independent verification.**
+GitHub Actions runs **the full Maven test suite against a disposable MySQL 8 instance**. The latest verified run passed **10 tests with 0 failures**: 3 controller unit tests, 6 web-page smoke tests, and the Spring context-load test. This confirms that the main pages render and the application starts against the schema; it does not establish that every create/edit/delete flow works end to end.
 
 ## Architecture
 
@@ -145,8 +145,9 @@ Screenshots will be added after verifying the application in a fresh local envir
 - [x] Standardize constructor injection in controllers
 - [x] Convert destructive links into POST forms
 - [x] Add focused JUnit/Mockito controller tests
-- [x] Add a CI test workflow
-- [ ] Verify CI and a full local build with a database
+- [x] Add a MySQL-backed CI workflow and smoke tests for the six main pages
+- [x] Verify Java 8 build and full test suite against MySQL 8 in GitHub Actions (10 passed)
+- [ ] Confirm create/edit/delete workflows in a running browser
 - [ ] Add real application screenshots
 - [ ] Modernize dependencies and address authorization/CSRF protection before any public deployment
 
