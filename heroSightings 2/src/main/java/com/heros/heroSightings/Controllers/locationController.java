@@ -9,7 +9,6 @@ import com.heros.heroSightings.daos.LocationDAO;
 import com.heros.heroSightings.dtos.Location;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +21,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class locationController {
    
-    @Autowired
-    LocationDAO locationDao;
+    private final LocationDAO locationDao;
+
+    public locationController(LocationDAO locationDao) {
+        this.locationDao = locationDao;
+    }
     
     @GetMapping("locations")
     public String displayLocations(Model model){
