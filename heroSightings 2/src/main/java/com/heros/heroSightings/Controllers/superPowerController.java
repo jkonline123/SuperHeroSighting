@@ -52,7 +52,7 @@ public class superPowerController {
         return "redirect:/powers";
     }
     
-    @GetMapping("deletePower")
+    @PostMapping("deletePower")
     public String deletePower(Integer id){
         powerDao.deletePowerById(id);
         
