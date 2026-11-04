@@ -1,5 +1,7 @@
 # SuperHero Sightings
 
+![Java tests](https://github.com/jkonline123/SuperHeroSighting/actions/workflows/java-tests.yml/badge.svg)
+
 A server-rendered Java application for tracking fictional superhero and villain sightings. The app connects characters, reported sightings, and locations; it also offers management screens for organizations and superpowers.
 
 **Portfolio restoration:** This project originated as a Software Guild coursework/team project. This repository preserves its original source and authorship while documenting the work needed to make it easier to run and review.
@@ -59,12 +61,6 @@ The old repository contained several archived application copies and generated `
    ```bash
    git clone https://github.com/jkonline123/SuperHeroSighting.git
    cd SuperHeroSighting
-   ```
-
-   Until these changes are merged, switch to the working branch:
-
-   ```bash
-   git switch improve/portfolio-ready
    ```
 
 2. On macOS, select JDK 8 when necessary:
