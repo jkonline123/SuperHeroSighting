@@ -11,8 +11,8 @@
 	<groupId>com.heros</groupId>
 	<artifactId>heroSightings</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>heroSightings_Roshna1</name>
-	<description>Demo project for Spring Boot</description>
+	<name>SuperHero Sightings</name>
+	<description>Spring MVC application for managing fictional superhero sightings</description>
 
 	<properties>
 		<java.version>1.8</java.version>
