@@ -99,7 +99,8 @@ Key code locations:
 - [ ] Verify the full build and all CRUD paths on a fresh environment
 - [ ] Move the active Maven project to a clean repository root
 - [ ] Remove archived duplicates and generated binaries after reviewing differences
-- [ ] Add verified application screenshots and integration tests
+- [x] Add focused character-controller unit tests (not yet executed in a local build)
+- [ ] Add verified application screenshots and database-backed integration tests
 - [ ] Evaluate a maintained Spring Boot upgrade separately
 
 ## Security and project history
