@@ -61,8 +61,8 @@ and open the template in the editor.
                             <td th:text="${c.description}">id</td>
                             <td th:text="${c.isHero}">id</td>
                             <!--         
-                            -->                 <td><a href="#" th:href="@{/editCharacter(id=${c.id})}"><i class="fa fa-pencil" aria-hidden="true"></i></a></t>
-                            <td><a href="#" th:href="@{/deleteCharacter(id=${c.id})}"><i class="fa fa-trash"></i></a></t>
+                            -->                 <td><a href="#" th:href="@{/editCharacter(id=${c.id})}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                            <td><form th:action="@{/deleteCharacter}" method="post"><input type="hidden" name="id" th:value="${c.id}"/><button type="submit" class="btn btn-link" aria-label="Delete character" onclick="return confirm('Delete this character?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form></td>
                         </tr>
                         ​ 
                     </tbody>
