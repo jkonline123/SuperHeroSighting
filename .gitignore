@@ -1,0 +1,8 @@
+**/target/
+*.class
+.DS_Store
+.idea/
+.env
+.env.*
+!.env.example
+**/application-local.properties
