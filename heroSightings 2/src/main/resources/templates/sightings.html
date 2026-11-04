@@ -60,7 +60,7 @@
                              <td><a href="#" th:href="@{/editSighting(id=${sighting.sightingID})}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                             
                             <!--<td>Delete</td>!-->
-                            <td><a href="#" th:href="@{/deleteSighting(id=${sighting.sightingID})}"><i class="fa fa-trash"></i></a></td>
+                            <td><form th:action="@{/deleteSighting}" method="post"><input type="hidden" name="id" th:value="${sighting.sightingID}"/><button type="submit" class="btn btn-link" aria-label="Delete sighting" onclick="return confirm('Delete this sighting?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form></td>
                             
                         </tr>
                     </tbody>
