@@ -1,0 +1,17 @@
+name: Java unit tests
+on:
+  push:
+    branches: [master, improve/portfolio-ready]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+          cache: maven
+      - name: Run database-independent controller tests
+        run: bash ./mvnw -B -Dtest=CharacterControllerTest test

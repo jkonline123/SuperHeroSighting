@@ -1,109 +1,159 @@
 # SuperHero Sightings
 
-A Java web application for recording fictional superhero and villain sightings, developed as a Software Guild-era project. Browse recently reported sightings and manage characters, locations, organizations, powers, and sighting records through server-rendered pages.
+A server-rendered Java application for tracking fictional superhero and villain sightings. The app connects characters, reported sightings, and locations; it also offers management screens for organizations and superpowers.
 
-## Features
+**Portfolio restoration:** This project originated as a Software Guild coursework/team project. This repository preserves its original source and authorship while documenting the work needed to make it easier to run and review.
 
-- Home page showing the ten most recent sightings
-- Character management (hero/villain status, name, description)
-- Locations, organizations, and superpowers sections
-- Sighting records linked to a character and a location
-- Edit and delete flows for several record types
+## What it does
 
-This is an older learning project being refactored for a technical portfolio. Some flows may require further repair; they have not all been re-verified on a fresh machine.
+- Displays the ten most recent reported sightings on the home page
+- Manages heroes and villains, their descriptions, and classifications
+- Provides separate pages for locations, organizations, and superpowers
+- Adds, edits, and deletes sighting records linking characters to locations
+- Persists information in MySQL through Spring's `JdbcTemplate` and DAO interfaces
 
-## Technology
+## Stack
 
-- Java 8 target
-- Spring Boot 2.1.9.RELEASE (legacy / unsupported)
-- Spring MVC, Thymeleaf, Spring JDBC (`JdbcTemplate`)
-- MySQL
-- Maven Wrapper, Bootstrap 4
+| Layer | Technology |
+| --- | --- |
+| Language | Java 8 |
+| Framework | Spring Boot 2.1.9, Spring MVC |
+| Views | Thymeleaf, Bootstrap 4 |
+| Data access | Spring JDBC, DAO pattern |
+| Database | MySQL |
+| Build | Maven 3.6.3 via Maven Wrapper |
+| Testing | JUnit 4, Mockito |
 
-> **Maintenance note:** The dependencies are historical and should not be exposed to the public internet without a security upgrade and review. Java 8 is the project's original target, not a recommendation for new projects.
+Spring Boot 2.1.9 and Bootstrap 4 are **legacy dependencies**. This is a learning/portfolio project, **not a production-hardened application**.
 
-## Which folder is the application?
+## Project structure
 
-**`heroSightings 2/` is the active application.** The other folders and ZIP files are historical project copies retained temporarily for comparison. Run all Maven commands inside `heroSightings 2/`. The repository is being cleaned up without discarding potentially unique legacy files.
+```text
+.
+├── pom.xml
+├── mvnw / mvnw.cmd
+├── .mvn/wrapper/
+├── sql/
+│   └── schema.sql
+└── src/
+    ├── main/
+    │   ├── java/com/heros/heroSightings/
+    │   │   ├── Controllers/
+    │   │   ├── Services/
+    │   │   ├── daos/
+    │   │   └── dtos/
+    │   └── resources/
+    │       ├── templates/
+    │       └── application.properties
+    └── test/java/
+```
 
-## Local setup
+The old repository contained several archived application copies and generated `target/` outputs. Those files were removed **from the current branch**, while remaining recoverable from Git history.
 
-Requirements: JDK 8, MySQL, and a terminal. Maven itself is not required if the bundled wrapper works.
+## Run locally
 
-1. Clone the repository and enter the active project:
+**Prerequisites:** JDK 8 and a local MySQL server. Start in the project root.
+
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/jkonline123/SuperHeroSighting.git
-   cd SuperHeroSighting/"heroSightings 2"
+   cd SuperHeroSighting
    ```
 
-2. Create a **disposable local** MySQL database using `../SuperHeroSighting.sql`. **Warning: the script begins with `DROP DATABASE IF EXISTS SuperSightings` and will destroy an existing database of that name. Review it before importing.** From the active application directory:
+   Until these changes are merged, switch to the working branch:
 
    ```bash
-   mysql -u YOUR_MYSQL_USER -p < ../SuperHeroSighting.sql
+   git switch improve/portfolio-ready
    ```
 
-3. Supply credentials as environment variables (do not commit passwords):
+2. On macOS, select JDK 8 when necessary:
+
+   ```bash
+   export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+   export PATH="$JAVA_HOME/bin:$PATH"
+   java -version
+   ```
+
+3. Create the database schema on a local development instance:
+
+   ```bash
+   mysql -u YOUR_MYSQL_USER -p < sql/schema.sql
+   ```
+
+   The schema uses `CREATE DATABASE IF NOT EXISTS` and does **not** drop the database. It is intended for a **fresh local database**. It does not migrate an already existing schema.
+
+4. Supply **local** connection credentials as environment variables:
 
    ```bash
    export DB_USER="YOUR_MYSQL_USER"
    export DB_PASSWORD="YOUR_LOCAL_MYSQL_PASSWORD"
+   # Optionally override DB_URL to point at a different MySQL instance.
    ```
 
-   Optionally set `DB_URL` to override the default local `SuperSightings` JDBC URL. Use a dedicated local database account with only the permissions the application needs.
-
-4. Run from the active application directory:
+5. Run the application:
 
    ```bash
    bash ./mvnw spring-boot:run
    ```
 
-5. Open `http://localhost:8080/`.
+   Open [http://localhost:8080](http://localhost:8080).
 
-### Testing
+**Note:** The Maven Wrapper will download its files on first use. Never commit database credentials. If the existing local MySQL schema predates the refactored `sql/schema.sql`, compare the columns before using create/edit forms; the original schema was inconsistent with some DAO queries.
 
-From `heroSightings 2/`:
+## Testing
+
+Run isolated controller unit tests (no MySQL needed):
+
+```bash
+bash ./mvnw -Dtest=CharacterControllerTest test
+```
+
+For the original Spring context-load test, configure a working local MySQL database and run:
 
 ```bash
 bash ./mvnw test
 ```
 
-The original project contains a Spring context-load test that requires a working database configuration. Tests and end-to-end page flows have not yet been verified against the refreshed repository.
+Automated checks are configured to run the isolated controller tests. **End-to-end behavior and the full database-backed suite still need independent verification.**
 
 ## Architecture
 
 ```text
-Browser / Thymeleaf templates
-          |
-Spring MVC Controllers
-          |
-DAO interfaces and JDBC implementations
-          |
-       MySQL
+Browser
+   ↓
+Thymeleaf templates / Spring MVC controllers
+   ↓
+DAO interfaces
+   ↓
+JdbcTemplate implementations
+   ↓
+MySQL
 ```
 
-Key code locations:
+The refactor introduces explicit constructor injection and changes delete actions from GET links to POST forms. The app still lacks user authentication, authorization, and a modern security review: do not deploy it publicly as-is.
 
-- Controllers: `heroSightings 2/src/main/java/com/heros/heroSightings/Controllers/`
-- DAOs: `heroSightings 2/src/main/java/com/heros/heroSightings/daos/`
-- Domain objects: `heroSightings 2/src/main/java/com/heros/heroSightings/dtos/`
-- Templates: `heroSightings 2/src/main/resources/templates/`
-- Database schema: `SuperHeroSighting.sql`
+## Screenshots
 
-## Portfolio restoration status
+Screenshots will be added after verifying the application in a fresh local environment. No unverified or simulated screenshots are presented as genuine.
 
-- [x] Identify the active project
-- [x] Move active database settings to environment variables
-- [x] Begin incremental controller/DAO refactoring
-- [ ] Verify the full build and all CRUD paths on a fresh environment
-- [ ] Move the active Maven project to a clean repository root
-- [ ] Remove archived duplicates and generated binaries after reviewing differences
-- [x] Add focused character-controller unit tests (not yet executed in a local build)
-- [ ] Add verified application screenshots and database-backed integration tests
-- [ ] Evaluate a maintained Spring Boot upgrade separately
+## Work in progress
 
-## Security and project history
+- [x] Restore the intended application into a single Maven project
+- [x] Remove committed build output and redundant project copies from the current tree
+- [x] Move database configuration to environment variables
+- [x] Standardize constructor injection in controllers
+- [x] Convert destructive links into POST forms
+- [x] Add focused JUnit/Mockito controller tests
+- [x] Add a CI test workflow
+- [ ] Verify CI and a full local build with a database
+- [ ] Add real application screenshots
+- [ ] Modernize dependencies and address authorization/CSRF protection before any public deployment
 
-An earlier revision of this repository contained hardcoded database credentials. Rotate any matching live password; removing a value from the current files does not erase it from Git history or archived ZIP files. Do not reuse those credentials.
+### Security note
 
-This is a portfolio restoration of a collaborative/bootcamp-era project. Existing author credits and Git history are preserved.
+Older revisions, ZIPs, and compiled assets committed in Git history may contain previously hardcoded MySQL credentials. The current source removes those values; **that does not erase historical secrets**. Rotate any password that is still active.
+
+## Credits
+
+Based on the original Software Guild-era project. Existing source-code author attributions and Git history are preserved.
