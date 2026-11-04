@@ -1,0 +1,28 @@
+# Build artifacts
+target/
+**/target/
+*.class
+*.log
+# IDE and operating system
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+.DS_Store
+Thumbs.db
+# Local database credentials/configuration
+.env
+.env.*
+!.env.example
+**/application-local.properties
+**/application-local.yml
+**/application-local.yaml
+# Local database files
+*.sqlite
+*.sqlite3
+*.dump
+
+# Downloaded Maven wrapper launcher
+.mvn/wrapper/maven-wrapper.jar

@@ -1,0 +1,43 @@
+name: Java tests
+
+on:
+  push:
+    branches: [master, improve/portfolio-ready]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: local-ci-only
+          MYSQL_DATABASE: SuperSightings
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -plocal-ci-only"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      DB_USER: root
+      DB_PASSWORD: local-ci-only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+          cache: maven
+      - name: Install MySQL client
+        run: |
+          if ! command -v mysql >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y default-mysql-client
+          fi
+      - name: Initialize database
+        run: mysql -h 127.0.0.1 -u root -plocal-ci-only < sql/schema.sql
+      - name: Run all tests
+        run: bash ./mvnw -B test
