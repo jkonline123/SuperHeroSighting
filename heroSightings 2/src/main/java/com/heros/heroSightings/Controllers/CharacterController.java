@@ -7,7 +7,6 @@ package com.heros.heroSightings.Controllers;
 
 import com.heros.heroSightings.daos.CharacterDAO;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +21,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CharacterController {
 
-    @Autowired
-    CharacterDAO characterDao;
+    private final CharacterDAO characterDao;
+
+    public CharacterController(CharacterDAO characterDao) {
+        this.characterDao = characterDao;
+    }
 
     @GetMapping("character")
     public String displayCharacters(Model model) {
