@@ -53,7 +53,7 @@ public class OrganizationsController {
         return "redirect:/organizations";
     }
 
-    @GetMapping("deleteOrganization")
+    @PostMapping("deleteOrganization")
     public String deleteOrganization(Integer id) {
 
         dao.deleteOrganization(id);
