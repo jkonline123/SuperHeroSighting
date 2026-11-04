@@ -10,7 +10,6 @@ import com.heros.heroSightings.daos.LocationDAO;
 import com.heros.heroSightings.daos.SightingDAO;
 import com.heros.heroSightings.dtos.Sighting;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +20,15 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class HomeController {
-    @Autowired
-    SightingDAO sightingDao;
-    @Autowired
-    LocationDAO locationDao;
-    @Autowired
-    CharacterDAO characterDao;
+    private final SightingDAO sightingDao;
+    private final LocationDAO locationDao;
+    private final CharacterDAO characterDao;
+
+    public HomeController(SightingDAO sightingDao, LocationDAO locationDao, CharacterDAO characterDao) {
+        this.sightingDao = sightingDao;
+        this.locationDao = locationDao;
+        this.characterDao = characterDao;
+    }
     
     @GetMapping("/")
     public String displaySightings(Model model){
