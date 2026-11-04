@@ -56,7 +56,7 @@ public class locationController {
     
     
     //DELETE 
-    @GetMapping("deleteLocation")
+    @PostMapping("deleteLocation")
     public String deleteLocation(Integer id){
         
         
