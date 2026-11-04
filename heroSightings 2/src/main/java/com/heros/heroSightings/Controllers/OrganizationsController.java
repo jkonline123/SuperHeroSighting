@@ -9,7 +9,6 @@ import com.heros.heroSightings.daos.OrganizationDAO;
 import com.heros.heroSightings.dtos.Organization;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +21,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class OrganizationsController {
 
-    @Autowired//does dependency injection
-    OrganizationDAO dao;
+    private final OrganizationDAO dao;
+
+    public OrganizationsController(OrganizationDAO dao) {
+        this.dao = dao;
+    }
 
     @GetMapping("organizations")
     public String displayOrganizations(Model model) {
