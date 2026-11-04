@@ -9,10 +9,12 @@ import com.heros.heroSightings.daos.LocationDAO;
 import com.heros.heroSightings.dtos.Location;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -57,13 +59,14 @@ public class locationController {
     
     //DELETE 
     @PostMapping("deleteLocation")
-    public String deleteLocation(Integer id){
-        
-        
-//        int id = Integer.parseInt(request.getParameter("id"));
-        
-        locationDao.deleteLocationById(id);
-        
+    public String deleteLocation(Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            locationDao.deleteLocationById(id);
+            redirectAttributes.addFlashAttribute("notice", "Location deleted.");
+        } catch (DataIntegrityViolationException ex) {
+            redirectAttributes.addFlashAttribute("error",
+                    "This location is used by existing sightings and cannot be deleted. Delete or reassign those sightings first.");
+        }
         return "redirect:/locations";
     }
     
