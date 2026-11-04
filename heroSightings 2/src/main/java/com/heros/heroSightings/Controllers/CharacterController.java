@@ -49,7 +49,6 @@ public class CharacterController {
         
         
       
-        System.out.println(characterType);
         Character character = new Character();
         
         
@@ -85,7 +84,6 @@ public class CharacterController {
         character.setDescription(request.getParameter("description"));
 
         character.setIsHero(Boolean.parseBoolean(request.getParameter("isHero")));
-        System.out.println(request.getParameter("isHero"));  
         characterDao.updateCharacter(character);
 
         return "redirect:/character";
