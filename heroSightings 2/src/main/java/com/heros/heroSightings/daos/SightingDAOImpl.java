@@ -19,8 +19,7 @@ import com.heros.heroSightings.dtos.Location;
 @Repository
 public class SightingDAOImpl implements SightingDAO {
 
-    @Autowired
-    JdbcTemplate jdbc;
+    private final JdbcTemplate jdbc;
     
     
      @Autowired
