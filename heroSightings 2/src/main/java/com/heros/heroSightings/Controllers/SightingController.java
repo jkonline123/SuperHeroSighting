@@ -11,7 +11,6 @@ import com.heros.heroSightings.daos.SightingDAO;
 import com.heros.heroSightings.dtos.Sighting;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +24,15 @@ import com.heros.heroSightings.dtos.Location;
     @Controller
 public class SightingController {
     
-    @Autowired
-    SightingDAO sightingDao;
-    @Autowired
-    LocationDAO locationDao;
-    @Autowired
-    CharacterDAO characterDao;
+    private final SightingDAO sightingDao;
+    private final LocationDAO locationDao;
+    private final CharacterDAO characterDao;
+
+    public SightingController(SightingDAO sightingDao, LocationDAO locationDao, CharacterDAO characterDao) {
+        this.sightingDao = sightingDao;
+        this.locationDao = locationDao;
+        this.characterDao = characterDao;
+    }
     
     @GetMapping("sightings")
     public String displaySightings(Model model){
@@ -80,7 +82,6 @@ public class SightingController {
     @PostMapping("editSightings")
     public String performEditOrganization(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
         Sighting sighting = new Sighting();
         sighting.setSightingID(id);
         Character c = new Character();
