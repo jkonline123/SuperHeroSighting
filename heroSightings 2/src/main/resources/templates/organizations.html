@@ -64,7 +64,7 @@ and open the template in the editor.
                     <td th:text="${o.address}">id</td>
                      <td th:text="${o.contactInfo}">id</td>
                      <td><a href="#" th:href="@{/editOrganizations(id=${o.organizationID})}"><i class="fa fa-pencil" aria-hidden="true"></i></a></t>
-                    <td><a href="#" th:href="@{/deleteOrganization(id=${o.organizationID})}"><i class="fa fa-trash"></i></a></t>
+                    <td><form th:action="@{/deleteOrganization}" method="post"><input type="hidden" name="id" th:value="${o.organizationID}"/><button type="submit" class="btn btn-link" aria-label="Delete organization" onclick="return confirm('Delete this organization?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form></td>
                 </tr>
 ​ 
             </tbody>
