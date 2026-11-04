@@ -53,8 +53,8 @@
                         <tr th:each="sighting : ${sightings}">
                             
                         <td th:text="${sighting.sightingID}">Sighting ID</td>
-                            <td th:text="${sighting.location.locationName}">Name</td>
                             <td th:text="${sighting.timeStamp}">TimeStamp</td>
+                            <td th:text="${sighting.location.locationName}">Location</td>
                             <td th:text="${sighting.character.name}">character</td>
                             
                             
