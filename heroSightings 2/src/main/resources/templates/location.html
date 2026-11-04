@@ -59,7 +59,7 @@ and open the template in the editor.
                             <td><a href="#" th:href="@{/editLocation(id=${location.id})}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                             
                             <!--<td>Delete</td>!-->
-                            <td><a href="#" th:href="@{/deleteLocation(id=${location.id})}"><i class="fa fa-trash"></i></a></td>
+                            <td><form th:action="@{/deleteLocation}" method="post"><input type="hidden" name="id" th:value="${location.id}"/><button type="submit" class="btn btn-link" aria-label="Delete location" onclick="return confirm('Delete this location?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form></td>
                         </tr>
                     </tbody>
                 </table>
