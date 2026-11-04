@@ -73,7 +73,7 @@ public class SightingController {
         return "editSighting";
     }
     
-    @GetMapping("deleteSighting")
+    @PostMapping("deleteSighting")
     public String deleteSighting(Integer id){
         sightingDao.deleteSightingById(id);
         return "redirect:/sightings";
