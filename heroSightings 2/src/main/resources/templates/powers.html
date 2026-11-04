@@ -58,7 +58,7 @@ and open the template in the editor.
                             <td><a href="#" th:href="@{/editPowers(id=${p.id})}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                             
                             <!--<td>Delete</td>!-->
-                            <td><a href="#" th:href="@{/deletePower(id=${p.id})}"><i class="fa fa-trash"></i></a></td>
+                            <td><form th:action="@{/deletePower}" method="post"><input type="hidden" name="id" th:value="${p.id}"/><button type="submit" class="btn btn-link" aria-label="Delete power" onclick="return confirm('Delete this power?')"><i class="fa fa-trash" aria-hidden="true"></i></button></form></td>
                         </tr>
                     </tbody>
                 </table>
