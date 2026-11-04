@@ -63,7 +63,7 @@ public class CharacterController {
         return "redirect:/character";
     }
 
-    @GetMapping("deleteCharacter")
+    @PostMapping("deleteCharacter")
     public String deleteCharacter(Integer id) {
         characterDao.deleteCharacterById(id);
         return "redirect:/character";
