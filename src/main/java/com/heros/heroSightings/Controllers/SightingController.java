@@ -39,6 +39,10 @@ public class SightingController {
         List<Sighting> sightings = sightingDao.getAllSightings();
         model.addAttribute("sightings", sightings);
         model.addAttribute("locations", locationDao.getAllLocations());
+        for (Sighting sighting : sightings) {
+            sighting.setCharacter(characterDao.getCharacterById(sighting.getCharacter().getId()));
+            sighting.setLocation(locationDao.getLocationById(sighting.getLocation().getId()));
+        }
         model.addAttribute("heroes", characterDao.getAllCharacters());
         
         return "sightings";
@@ -69,6 +73,7 @@ public class SightingController {
         Sighting sighting = sightingDao.getSightingById(id);
         model.addAttribute("locations", locationDao.getAllLocations());
         model.addAttribute("heroes", characterDao.getAllCharacters());
+        model.addAttribute("sighting", sighting);
         model.addAttribute("id", id);
         return "editSighting";
     }
