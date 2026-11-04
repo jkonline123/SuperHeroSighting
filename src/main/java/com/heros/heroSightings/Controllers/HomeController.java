@@ -38,6 +38,8 @@ public class HomeController {
             s.setLocation(locationDao.getLocationById(s.getLocation().getId()));
         }
         model.addAttribute("sightings", sightings);
+        model.addAttribute("characterCount", characterDao.getAllCharacters().size());
+        model.addAttribute("locationCount", locationDao.getAllLocations().size());
         
         
         return "home";
