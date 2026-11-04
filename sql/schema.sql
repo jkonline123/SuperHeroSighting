@@ -5,7 +5,7 @@ USE SuperSightings;
 CREATE TABLE IF NOT EXISTS characters(
 CharacterID INT PRIMARY KEY auto_increment,
 `name` varchar(30) NOT NULL,
-`description` varchar(30) NOT NULL,
+`description` varchar(1000) NOT NULL,
 isHero boolean NOT NULL
 );
 
