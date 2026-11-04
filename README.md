@@ -37,10 +37,10 @@ Requirements: JDK 8, MySQL, and a terminal. Maven itself is not required if the 
    cd SuperHeroSighting/"heroSightings 2"
    ```
 
-2. Create a **disposable local** MySQL database using the root-level `SuperHeroSighting.sql` script. **Warning: it begins with `DROP DATABASE IF EXISTS SuperSightings` and will destroy an existing database of that name. Review it before importing.** From the repository root:
+2. Create a **disposable local** MySQL database using `../SuperHeroSighting.sql`. **Warning: the script begins with `DROP DATABASE IF EXISTS SuperSightings` and will destroy an existing database of that name. Review it before importing.** From the active application directory:
 
    ```bash
-   mysql -u YOUR_MYSQL_USER -p < SuperHeroSighting.sql
+   mysql -u YOUR_MYSQL_USER -p < ../SuperHeroSighting.sql
    ```
 
 3. Supply credentials as environment variables (do not commit passwords):
@@ -55,7 +55,6 @@ Requirements: JDK 8, MySQL, and a terminal. Maven itself is not required if the 
 4. Run from the active application directory:
 
    ```bash
-   cd "heroSightings 2"
    bash ./mvnw spring-boot:run
    ```
 
